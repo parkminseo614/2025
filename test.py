@@ -1,4 +1,4 @@
-         import streamlit as st
+import streamlit as st
 import pandas as pd
 
 # ---------------------- 데이터베이스 확장 ----------------------
