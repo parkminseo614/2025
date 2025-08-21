@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import time
 
 # ---------------------- 피부 타입별 기본 성분 ----------------------
 skin_type_recommendations = {
@@ -62,87 +61,24 @@ skincare_data = {
             {"단계": "세럼", "브랜드": "미샤", "제품": "타임 레볼루션 나이트 리페어 앰플"},
             {"단계": "크림", "브랜드": "AHC", "제품": "프리미엄 아이크림 포 페이스"}
         ]
-    },
-    "요철": {
-        "추천 성분": ["AHA", "PHA", "나이아신아마이드", "레티놀"],
-        "피해야 할 성분": ["두꺼운 오일", "실리콘 계열 성분"],
-        "추천 제품": [
-            {"단계": "클렌저", "브랜드": "닥터지", "제품": "브라이트닝 필링 젤"},
-            {"단계": "토너", "브랜드": "코스알엑스", "제품": "AHA/BHA 클라리파잉 토너"},
-            {"단계": "세럼", "브랜드": "더랩바이블랑두", "제품": "AHA 10% 세럼"},
-            {"단계": "크림", "브랜드": "구달", "제품": "청귤 비타C 잡티 크림"}
-        ]
-    },
-    "여드름 흉터": {
-        "추천 성분": ["비타민C", "알부틴", "트라넥사믹애씨드", "마데카소사이드"],
-        "피해야 할 성분": ["강한 스크럽 입자", "과도한 산"],
-        "추천 제품": [
-            {"단계": "클렌저", "브랜드": "한율", "제품": "달빛유자 클렌징폼"},
-            {"단계": "토너", "브랜드": "아이소이", "제품": "잡티 토너"},
-            {"단계": "세럼", "브랜드": "비타민트리", "제품": "VC 세럼"},
-            {"단계": "크림", "브랜드": "센텔리안24", "제품": "마데카 크림"}
-        ]
     }
 }
 
 # ---------------------- 앱 레이아웃 ----------------------
 st.set_page_config(page_title="피부고민에 따른 성분 추천", layout="wide")
 
-# 🎨 파스텔톤 CSS 스타일
 st.markdown("""
-    <style>
-    body {
-        background-color: #ffe6f0;
-    }
-    .stApp {
-        background-color: #ffe6f0;
-    }
-    h1, h2, h3, h4 {
-        color: #ff80a6;
-    }
-    .stButton>button {
-        background-color: #ffb3c6;
-        color: white;
-        border-radius: 12px;
-        border: none;
-        padding: 0.5em 1em;
-    }
-    .stButton>button:hover {
-        background-color: #ff99bb;
-        color: white;
-    }
-    .stDownloadButton>button {
-        background-color: #ffb3c6;
-        color: white;
-        border-radius: 12px;
-        border: none;
-        padding: 0.5em 1em;
-    }
-    .stDownloadButton>button:hover {
-        background-color: #ff99bb;
-        color: white;
-    }
-    .reportview-container .main .block-container{
-        padding-top: 1rem;
-    }
-    </style>
-""", unsafe_allow_html=True)
-
-st.markdown("""
-    <h1 style='text-align: center;'>💖 피부고민에 따른 성분 추천 💖</h1>
+    <h1 style='text-align: center; color: #FF69B4;'>💖 피부고민에 따른 성분 추천 💖</h1>
     <p style='text-align: center; font-size:18px;'>당신의 피부를 위한 맞춤 가이드를 준비했어요 ✨<br>피부 고민과 타입에 따라 알맞은 성분과 제품을 확인해보세요.</p>
 """, unsafe_allow_html=True)
 
-# ---------------------- 사이드바 선택 ----------------------
+# 사이드바 선택
 st.sidebar.header("피부 정보 선택")
 skin_type = st.sidebar.selectbox("피부 타입을 골라주세요", ["중성", "지성", "복합성", "건성", "모름"])
 skin_concern = st.sidebar.selectbox("피부 고민을 골라주세요", list(skincare_data.keys()))
 
 # ---------------------- 결과 표시 ----------------------
 if skin_concern:
-    with st.spinner("당신의 피부에 맞는 성분과 제품을 찾는 중이에요... 🔍💕"):
-        time.sleep(2)
-
     data = skincare_data[skin_concern]
 
     st.subheader("🌸 피부 타입별 추천 성분")
