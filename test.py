@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import time
 
 # ---------------------- 피부 타입별 기본 성분 ----------------------
 skin_type_recommendations = {
@@ -67,8 +68,48 @@ skincare_data = {
 # ---------------------- 앱 레이아웃 ----------------------
 st.set_page_config(page_title="피부고민에 따른 성분 추천", layout="wide")
 
+# 🎨 파스텔톤 CSS 스타일
 st.markdown("""
-    <h1 style='text-align: center; color: #FF69B4;'>💖 피부고민에 따른 성분 추천 💖</h1>
+    <style>
+    body {
+        background-color: #ffe6f0;
+    }
+    .stApp {
+        background-color: #ffe6f0;
+    }
+    h1, h2, h3, h4 {
+        color: #ff80a6;
+    }
+    .stButton>button {
+        background-color: #ffb3c6;
+        color: white;
+        border-radius: 12px;
+        border: none;
+        padding: 0.5em 1em;
+    }
+    .stButton>button:hover {
+        background-color: #ff99bb;
+        color: white;
+    }
+    .stDownloadButton>button {
+        background-color: #ffb3c6;
+        color: white;
+        border-radius: 12px;
+        border: none;
+        padding: 0.5em 1em;
+    }
+    .stDownloadButton>button:hover {
+        background-color: #ff99bb;
+        color: white;
+    }
+    .reportview-container .main .block-container{
+        padding-top: 1rem;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+    <h1 style='text-align: center;'>💖 피부고민에 따른 성분 추천 💖</h1>
     <p style='text-align: center; font-size:18px;'>당신의 피부를 위한 맞춤 가이드를 준비했어요 ✨<br>피부 고민과 타입에 따라 알맞은 성분과 제품을 확인해보세요.</p>
 """, unsafe_allow_html=True)
 
@@ -79,6 +120,9 @@ skin_concern = st.sidebar.selectbox("피부 고민을 골라주세요", list(ski
 
 # ---------------------- 결과 표시 ----------------------
 if skin_concern:
+    with st.spinner("당신의 피부에 맞는 성분과 제품을 찾는 중이에요... 🔍💕"):
+        time.sleep(2)
+
     data = skincare_data[skin_concern]
 
     st.subheader("🌸 피부 타입별 추천 성분")
